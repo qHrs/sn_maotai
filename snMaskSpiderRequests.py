@@ -9,6 +9,7 @@ import pickle
 import json
 from PIL import Image
 from util import parse_json
+from util import get_random_useragent
 
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
@@ -35,6 +36,7 @@ class SnMaskSpider(object):
         #options.add_argument('blink-settings=imagesEnabled=false')  # 不加载图片, 提升速度
         options.add_argument('--headless')  # 浏览器不提供可视化页面. linux下如果系统不支持可视化不加这条会启动失败
         options.add_argument('log-level=3')  # 只输出失败信息
+        options.add_argument('--user-agent="{}"'.format(get_random_useragent()))
         driver = webdriver.Chrome(executable_path=executable_path, options=options)
 
         self.login = Login(driver)
